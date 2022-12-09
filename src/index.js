@@ -27,16 +27,16 @@ async function onSubmiteClick(e) {
   refs.loadMore.classList.add('is-hiden');
   newsApiServer.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
   newsApiServer.resetPage();
-  newsApiServer.getUrl().then(onList).then((data) => {
+  await newsApiServer.getUrl().then(onList).then((data) => {
 
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
   })
   
 }
 
-function onMore() {
+async function onMore() {
 
-  newsApiServer.getUrl().then(onList).then((data) => {
+  await newsApiServer.getUrl().then(onList).then((data) => {
     const total = data.totalHits / 40;
     if (newsApiServer.page >= total) {
       refs.loadMore.classList.add('is-hiden');
